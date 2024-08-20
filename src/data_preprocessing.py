@@ -1,0 +1,31 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+
+def preprocess_data(file_path):
+    df = pd.read_csv(file_path, parse_dates=['Date'], index_col='Date')
+
+    # Feature Engineering
+    df['Day'] = df.index.day
+    df['Month'] = df.index.month
+    df['Year'] = df.index.year
+    df['DayOfWeek'] = df.index.dayofweek
+    df['Lag_1'] = df['Close'].shift(1)
+    df['Lag_7'] = df['Close'].shift(7)
+    df.dropna(inplace=True)
+
+    # Train-Test Split
+    train, test = train_test_split(df, test_size=0.2, shuffle=False)
+
+    # Scaling features
+    scaler = StandardScaler()
+    train_scaled = scaler.fit_transform(train)
+    test_scaled = scaler.transform(test)
+
+    X_train = train_scaled[:, :-1]
+    y_train = train_scaled[:, -1]
+    X_test = test_scaled[:, :-1]
+    y_test = test_scaled[:, -1]
+
+    return X_train, y_train, X_test, y_test, scaler
