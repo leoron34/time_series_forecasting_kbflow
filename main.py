@@ -6,7 +6,7 @@ from src.hyperparameter_tuning import hyperparameter_tuning
 X_train, y_train, X_test, y_test, scaler = preprocess_data('data/stock_prices.csv')
 
 # Hyperparameter tuning
-best_hps = hyperparameter_tuning(X_train, y_train, X_test, y_test)
+# best_hps = hyperparameter_tuning(X_train, y_train, X_test, y_test)
 
 # Train the model
 model = build_and_train_model(X_train, y_train, X_test, y_test)

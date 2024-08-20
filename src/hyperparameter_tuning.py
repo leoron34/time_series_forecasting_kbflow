@@ -1,5 +1,7 @@
 import kerastuner as kt
-from model_training import build_and_train_model
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+
 
 def hyperparameter_tuning(X_train, y_train, X_test, y_test):
     def build_model(hp):
