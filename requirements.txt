@@ -1,7 +1,5 @@
 pandas
 numpy
 scikit-learn
-keras
-pytorch
-tensorflow
+keras-tuner
 flask
