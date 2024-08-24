@@ -11,5 +11,4 @@ EXPOSE 5000
 
 # Setup an app user so the container doesn't run as the root user
 
-
-CMD ["python", "./src/api.py"]
+CMD ["./run.sh"]
