@@ -1,3 +1,41 @@
+# data_preprocessing.py
+import pandas as pd
+
+def load_and_prepare_data(filepath):
+    # Load the stock data
+    data = pd.read_csv(filepath, parse_dates=['Date'], index_col='Date')
+    
+    # Ensure the data is sorted by date
+    data = data.sort_index()
+
+    # Set the frequency to business days (B) or another appropriate frequency
+    data = data.asfreq('B')
+
+    # Use the 'Close' price for ARIMA modeling
+    time_series = data['Close'].dropna()  # Dropping NA values if any
+
+    return time_series
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # import pandas as pd
 # import numpy as np
 # from sklearn.preprocessing import StandardScaler
@@ -31,24 +69,4 @@
 #     return X_train, y_train, X_test, y_test, scaler
 
 
-# data_preprocessing.py
-import pandas as pd
 
-def load_and_prepare_data(filepath):
-    # Load the stock data
-    data = pd.read_csv(filepath, parse_dates=['Date'], index_col='Date')
-    
-    # Ensure the data is sorted by date
-    data = data.sort_index()
-
-    # Set the frequency to business days (B) or another appropriate frequency
-    data = data.asfreq('B')
-
-    # Use the 'Close' price for ARIMA modeling
-    time_series = data['Close'].dropna()  # Dropping NA values if any
-
-    return time_series
-
-
-# Example usage:
-# time_series = load_and_prepare_data('data/stock_prices.csv')
