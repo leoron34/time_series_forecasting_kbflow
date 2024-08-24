@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forecast
+  labels:
+    app: forecast
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forecast
+  template:
+    metadata:
+      labels:
+        app: forecast
+    spec:
+      containers:
+      - name: forecast
+        imagePullPolicy: Never
+        image: appname-forecasting-v6:latest
+        ports:
+        - containerPort: 5000
